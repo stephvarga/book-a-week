@@ -24,8 +24,8 @@ export const site = {
     titleLine2: 'of somewhere nice',
     subtitle: "Our gift to you — a week away, on us, whenever you're ready.",
     image: {
-      src: '/images/hero.svg',
-      alt: 'Illustration of the resort by the water',
+      src: '/images/hero.jpg',
+      alt: 'Aerial view of a coastal town at sunset',
     },
   },
 
@@ -48,12 +48,12 @@ export const site = {
     eyebrow: 'The Property',
     heading: "Where you'll be staying",
     images: [
-      { src: '/images/gallery-1.svg', alt: 'View from the resort' },
-      { src: '/images/gallery-2.svg', alt: 'The resort building' },
-      { src: '/images/gallery-3.svg', alt: 'Nearby boardwalk' },
-      { src: '/images/gallery-4.svg', alt: 'View from the balcony' },
-      { src: '/images/gallery-5.svg', alt: 'Local scenery' },
-      { src: '/images/gallery-6.svg', alt: 'Pool and spa area' },
+      { src: '/images/gallery-1.jpg', alt: 'Ocean-view lounge with floor-to-ceiling windows' },
+      { src: '/images/gallery-2.jpg', alt: 'Coastal highway winding along the bluffs' },
+      { src: '/images/gallery-3.jpg', alt: 'Wildflowers on a coastal bluff above the beach' },
+      { src: '/images/gallery-4.jpg', alt: 'Bedroom with an ocean view' },
+      { src: '/images/gallery-5.jpg', alt: 'Beach and pier on a sunny day' },
+      { src: '/images/hero.jpg', alt: 'Aerial view of a coastal town at sunset' },
     ],
   },
 
@@ -81,6 +81,10 @@ export const site = {
     heading: 'Choose your dates',
     intro:
       "Select a week below, then fill out the short form and we'll confirm everything with you directly. Dates run Saturday to Saturday.",
+    // How far ahead to show weeks, starting from whenever the visitor loads
+    // the page (see src/lib/dates.ts) — 52 weeks is one year. Bump this if
+    // you want a longer or shorter rolling window.
+    weeksAhead: 52,
     successMessage: (dateLabel: string) =>
       `🎉 Request received! Your week of ${dateLabel} is on its way to confirmation. We'll reach out to you shortly to finalize everything.`,
   },

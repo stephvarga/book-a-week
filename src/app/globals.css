@@ -5,20 +5,25 @@
 }
 
 :root {
-  --lavender: #d4a8d8;
-  --peach: #f4a96a;
-  --coral: #e8524a;
-  --sky: #a8d4e8;
-  --chartreuse: #c8d44a;
-  --green-deep: #3a6b2a;
-  --pink-hot: #e84a8a;
-  --yellow: #f0d44a;
-  --cream: #fdf8f0;
-  --warm-white: #fffdf8;
-  --dark: #1e1a14;
-  --mid: #5a4a3a;
-  --light: #9a8a7a;
-  --dune: #ede0cc;
+  /* Palette sampled and blended from the gallery photos: near-black and
+     burgundy anchor it, terracotta bridges into gold and teal, sage rounds
+     it out, blush and cream soften the ends. Pushed for more contrast:
+     darker darks, richer/more saturated accents, brighter lights. */
+  --burgundy: #5c1f2d;
+  --burgundy-deep: #3a141e;
+  --terracotta: #b35f38;
+  --gold: #e0be24;
+  --teal: #2c7885;
+  --teal-deep: #16414a;
+  --sage: #566a5b;
+  --blush: #c97882;
+
+  --cream: #f7ecd9;
+  --warm-white: #fdf8f0;
+  --dark: #140d0a;
+  --mid: #4a372f;
+  --light: #8a6f61;
+  --dune: #ecd9c9;
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'DM Sans', system-ui, sans-serif;
@@ -42,11 +47,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--lavender);
+  background: var(--blush);
   background-image:
-    radial-gradient(circle at 15% 25%, rgba(244,169,106,0.4) 0%, transparent 45%),
-    radial-gradient(circle at 85% 75%, rgba(200,212,74,0.3) 0%, transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(232,82,74,0.25) 0%, transparent 40%);
+    radial-gradient(circle at 15% 25%, rgba(179,95,56,0.45) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(224,190,36,0.35) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(92,31,45,0.3) 0%, transparent 40%);
   padding: 2rem;
   text-align: center;
 }
@@ -57,7 +62,7 @@ body {
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(30,26,20,0.55);
+  color: rgba(20,13,10,0.6);
   margin-bottom: 1.25rem;
 }
 
@@ -73,7 +78,7 @@ body {
   font-family: var(--font-display);
   font-size: clamp(1rem, 2.5vw, 1.3rem);
   font-style: italic;
-  color: rgba(30,26,20,0.65);
+  color: rgba(20,13,10,0.7);
   margin-bottom: 3rem;
 }
 
@@ -90,7 +95,7 @@ body {
   width: 100%;
   padding: 0.875rem 1.25rem;
   background: rgba(255,255,255,0.6);
-  border: 2px solid rgba(30,26,20,0.2);
+  border: 2px solid rgba(20,13,10,0.25);
   border-radius: 100px;
   color: var(--dark);
   font-family: var(--font-body);
@@ -100,16 +105,16 @@ body {
   transition: border-color 0.2s, background 0.2s;
 }
 
-.password-screen__input::placeholder { color: rgba(30,26,20,0.35); }
+.password-screen__input::placeholder { color: rgba(20,13,10,0.4); }
 .password-screen__input:focus {
-  border-color: var(--coral);
+  border-color: var(--burgundy);
   background: rgba(255,255,255,0.85);
 }
 
 .password-screen__btn {
   width: 100%;
   padding: 0.9rem 1.25rem;
-  background: var(--coral);
+  background: var(--burgundy);
   border: none;
   border-radius: 100px;
   color: #fff;
@@ -122,12 +127,12 @@ body {
   transition: background 0.2s, transform 0.1s;
 }
 
-.password-screen__btn:hover { background: #d03f38; transform: translateY(-2px); }
+.password-screen__btn:hover { background: var(--burgundy-deep); transform: translateY(-2px); }
 .password-screen__btn:active { transform: translateY(0); }
 
 .password-screen__error {
   font-size: 0.82rem;
-  color: var(--coral);
+  color: var(--burgundy);
   font-weight: 600;
 }
 
@@ -153,12 +158,6 @@ body {
   object-position: center;
 }
 
-.hero__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(30,10,5,0.72) 0%, rgba(30,10,5,0.15) 55%, transparent 100%);
-}
-
 .hero__content {
   position: relative;
   z-index: 1;
@@ -174,7 +173,10 @@ body {
   font-size: 0.68rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
+  /* Was 0.6 opacity, which relied on the dark hero__overlay scrim for
+     contrast. That's gone now that the hero is a flat color, so this needs
+     to be more opaque to stay readable. */
+  color: rgba(255,255,255,0.85);
   margin-bottom: 0.875rem;
 }
 
@@ -197,9 +199,9 @@ body {
 .section { padding: 5rem 2rem; }
 .section--cream { background: var(--cream); }
 .section--white { background: var(--warm-white); }
-.section--lavender { background: var(--lavender); }
-.section--peach { background: #fdecd8; }
-.section--chartreuse { background: #f2f5d4; }
+.section--lavender { background: #f2dde0; }
+.section--peach { background: #ecd7cd; }
+.section--chartreuse { background: #d5dad6; }
 
 .section__inner { max-width: 860px; margin: 0 auto; }
 .section__inner--wide { max-width: 1100px; margin: 0 auto; }
@@ -210,11 +212,11 @@ body {
   font-size: 0.68rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--coral);
+  color: var(--burgundy);
   margin-bottom: 0.6rem;
 }
 
-.eyebrow--green { color: var(--green-deep); }
+.eyebrow--green { color: var(--teal-deep); }
 .eyebrow--dark { color: var(--dark); opacity: 0.5; }
 
 .section__title {
@@ -255,10 +257,10 @@ body {
   text-align: center;
 }
 
-.stat:nth-child(1) { background: var(--lavender); }
-.stat:nth-child(2) { background: #fdecd8; }
-.stat:nth-child(3) { background: #fde4d8; }
-.stat:nth-child(4) { background: var(--chartreuse); }
+.stat:nth-child(1) { background: #f2dde0; }
+.stat:nth-child(2) { background: #ecd7cd; }
+.stat:nth-child(3) { background: #f7efc8; }
+.stat:nth-child(4) { background: #d5dad6; }
 
 .stat__value {
   font-family: var(--font-accent);
@@ -306,7 +308,7 @@ body {
   gap: 0.5rem;
   padding: 0.55rem 1rem;
   background: rgba(255,255,255,0.5);
-  border: 2px solid rgba(30,26,20,0.12);
+  border: 2px solid rgba(20,13,10,0.18);
   border-radius: 100px;
   font-size: 0.82rem;
   font-weight: 500;
@@ -344,15 +346,15 @@ body {
 }
 
 .date-card:hover {
-  border-color: var(--peach);
+  border-color: var(--terracotta);
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(244,169,106,0.25);
+  box-shadow: 0 6px 20px rgba(179,95,56,0.3);
 }
 
 .date-card.selected {
-  border-color: var(--coral);
-  background: #fff0ee;
-  box-shadow: 0 6px 20px rgba(232,82,74,0.2);
+  border-color: var(--burgundy);
+  background: #ecd2d6;
+  box-shadow: 0 6px 20px rgba(92,31,45,0.25);
 }
 
 .date-card.selected::after {
@@ -360,7 +362,7 @@ body {
   position: absolute;
   top: 0.4rem;
   right: 0.65rem;
-  color: var(--coral);
+  color: var(--burgundy);
   font-size: 0.8rem;
   font-weight: 700;
 }
@@ -444,13 +446,13 @@ body {
 }
 
 .form-group input:focus,
-.form-group textarea:focus { border-color: var(--peach); }
+.form-group textarea:focus { border-color: var(--terracotta); }
 
 .form-group textarea { resize: vertical; min-height: 100px; }
 
 .submit-btn {
   padding: 1rem 2.5rem;
-  background: var(--coral);
+  background: var(--burgundy);
   color: #fff;
   border: none;
   border-radius: 100px;
@@ -464,28 +466,28 @@ body {
 }
 
 .submit-btn:hover:not(:disabled) {
-  background: #d03f38;
+  background: var(--burgundy-deep);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(232,82,74,0.35);
+  box-shadow: 0 6px 20px rgba(92,31,45,0.4);
 }
 
 .submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
 .form-success {
   padding: 1.75rem;
-  background: #f2f5d4;
-  border: 2px solid var(--chartreuse);
+  background: #d5dad6;
+  border: 2px solid var(--sage);
   border-radius: 1rem;
   font-family: var(--font-display);
   font-size: 1.1rem;
-  color: var(--green-deep);
+  color: var(--teal-deep);
   line-height: 1.7;
 }
 
 .form-error {
   margin-top: 0.75rem;
   font-size: 0.82rem;
-  color: var(--coral);
+  color: var(--burgundy);
   font-weight: 600;
 }
 

@@ -30,9 +30,16 @@ The available date ranges live in [`src/lib/dates.ts`](src/lib/dates.ts)
 instead, since the server also validates bookings against that exact list —
 see the comment at the top of the file for why it's kept separate.
 
-Gallery and hero images default to placeholder SVGs under
-[`public/images/`](public/images/). Drop your own JPGs/PNGs in there with the
-same filenames (or update the paths in `content/site.ts`) to replace them. If
+Gallery and hero images under [`public/images/`](public/images/) are free
+stock photos from Unsplash (no attribution required under the [Unsplash
+License](https://unsplash.com/license), credited here anyway): the hero is by
+[Yifan Ma](https://unsplash.com/@nina33), and the gallery photos are by [Alan
+Zhang](https://unsplash.com/@alanhd), [Christine von
+Raesfeld](https://unsplash.com/@cvonraesfeld), Sterling Lanier, [Colton
+Jones](https://unsplash.com/@colt10jordan), and [Tran
+Nguyen](https://unsplash.com/@bestraan0712). They're generic coastal shots,
+not the real property — drop your own JPGs/PNGs in there with the same
+filenames (or update the paths in `content/site.ts`) to replace them. If
 you'd rather host images externally, add the image host to
 `images.remotePatterns` in `next.config.js` and use `next/image` or an
 `<img>` tag pointing at the remote URL.

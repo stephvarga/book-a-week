@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { AVAILABLE_DATES, type AvailableDate } from '@/lib/dates';
+import { useEffect, useMemo, useState } from 'react';
+import { generateUpcomingWeeks, type AvailableDate } from '@/lib/dates';
 import { site } from '@/content/site';
 
 // ── Password screen ──────────────────────────────────────────────────────────
@@ -169,9 +169,16 @@ function BookingForm({ selectedDate }: { selectedDate: AvailableDate }) {
 // ── Main site ────────────────────────────────────────────────────────────────
 function MainSite() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const selectedDate = AVAILABLE_DATES.find((d) => d.id === selectedId) ?? null;
+  // Computed once per mount from the browser's own clock, so the rolling
+  // window (and what counts as "already passed") is accurate to this
+  // visitor's timezone rather than the server's.
+  const availableDates = useMemo(
+    () => generateUpcomingWeeks({ from: new Date(), weeksAhead: site.booking.weeksAhead }),
+    []
+  );
+  const selectedDate = availableDates.find((d) => d.id === selectedId) ?? null;
 
-  const years = Array.from(new Set(AVAILABLE_DATES.map((d) => d.id.split('-')[0])));
+  const years = Array.from(new Set(availableDates.map((d) => d.id.split('-')[0])));
 
   return (
     <div className="site">
@@ -179,7 +186,6 @@ function MainSite() {
       <section className="hero">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="hero__bg" src={site.hero.image.src} alt={site.hero.image.alt} />
-        <div className="hero__overlay" />
         <div className="hero__content">
           <p className="hero__eyebrow">{site.hero.eyebrow}</p>
           <h1 className="hero__title">
@@ -265,13 +271,13 @@ function MainSite() {
                     fontSize: '1.1rem',
                     marginBottom: '0.75rem',
                     marginTop: '1.5rem',
-                    color: 'var(--ocean-deep)',
+                    color: 'var(--burgundy)',
                   }}
                 >
                   — {year}
                 </p>
                 <div className="dates-grid">
-                  {AVAILABLE_DATES.filter((d) => d.id.startsWith(year)).map((d) => (
+                  {availableDates.filter((d) => d.id.startsWith(year)).map((d) => (
                     <div
                       key={d.id}
                       className={`date-card ${selectedId === d.id ? 'selected' : ''}`}
