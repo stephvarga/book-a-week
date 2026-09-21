@@ -1,0 +1,25 @@
+{
+  "name": "book-a-week",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A password-protected vacation week booking site (Next.js + Resend) — fork and configure for your own property.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^15.5.25",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "resend": "^4.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}
