@@ -6,8 +6,6 @@ import { getClientIp, rateLimit } from '@/lib/rate-limit';
 import { cleanText, escapeHtml, isValidEmail, isValidGuests } from '@/lib/sanitize';
 import { site } from '@/content/site';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const MAX_REQUESTS = 5;
 const WINDOW_MS = 10 * 60 * 1000; // 10 minutes
 
@@ -49,11 +47,19 @@ export async function POST(req: NextRequest) {
 
     const ownerEmail = process.env.OWNER_EMAIL;
     const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
+    const resendApiKey = process.env.RESEND_API_KEY;
 
-    if (!ownerEmail) {
-      console.error('OWNER_EMAIL env variable not set');
+    if (!ownerEmail || !resendApiKey) {
+      console.error(
+        !ownerEmail ? 'OWNER_EMAIL env variable not set' : 'RESEND_API_KEY env variable not set'
+      );
       return NextResponse.json({ error: 'Server misconfiguration' }, { status: 500 });
     }
+
+    // Constructed here rather than at module scope: the Resend SDK throws
+    // synchronously on a missing key, which would otherwise crash `next
+    // build`'s page-data collection step before any request is ever made.
+    const resend = new Resend(resendApiKey);
 
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
